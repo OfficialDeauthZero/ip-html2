@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supercharged IP Spammer</title>
+    <style>
+        body {
+            font-family: monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            background: black;
+            color: lime;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    function getRandomIPv4() {
+        return `${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}.${Math.floor(Math.random() * 256)}`;
+    }
+
+    function getRandomMAC() {
+        return `${[...Array(6)].map(() => Math.floor(Math.random() * 256).toString(16).padStart(2, '0')).join(':')}`;
+    }
+
+    function getRandomItem(list) {
+        return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function getRandomDate() {
+        let start = new Date(2010, 0, 1);
+        let end = new Date();
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime())).toISOString();
+    }
+
+    function generateNetworkInfo() {
+        const infrastructures = ["Fiber Optic", "DSL", "Satellite", "5G", "4G LTE", "Wi-Fi", "Ethernet", "VPN", "Proxy", "Mesh Network", "Dial-Up", "Broadband", "Unicast"];
+        const encryptions = ["AES-256", "WPA3", "TLS 1.3", "SSL", "SHA-512", "RSA-2048", "ECC", "Blowfish", "ChaCha20"];
+        const channels = Array.from({ length: 14 }, (_, i) => (i + 1).toString()); // Channels 1-14
+        const ghzBands = ["2.4 GHz", "5 GHz", "6 GHz", "900 MHz"];
+        const isps = ["AT&T", "Comcast", "Verizon", "Google Fiber", "Starlink", "Sprint", "T-Mobile", "Vodafone", "Xfinity", "Spectrum", "CenturyLink", "Bell", "Orange", "BT", "Telstra", "Jio", "Rogers", "Frontier", "RCN", "Suddenlink", "Oracle", "Cox", "Charter", "Sagemcom Broadband"];
+        const latencies = ["1ms", "5ms", "10ms", "15ms", "20ms", "30ms", "40ms", "50ms", "75ms", "100ms", "125ms", "150ms", "175ms", "200ms", "250ms", "300ms", "500ms", "1s+", "Variable"];
+        const wavelengths = ["700nm", "850nm", "1310nm", "1550nm", "10mm", "5cm", "2.4m", "Unknown"];
+        const rssiValues = ["-30 dBm (Excellent)", "-40 dBm (Very Good)", "-50 dBm (Good)", "-60 dBm (Fair)", "-70 dBm (Weak)", "-80 dBm (Very Weak)", "-90 dBm (Unstable)"];
+
+        return `IP: ${getRandomIPv4()}
+MAC: ${getRandomMAC()}
+Infrastructure: ${getRandomItem(infrastructures)}
+Encryption: ${getRandomItem(encryptions)}
+Channel: ${getRandomItem(channels)}
+GHz Band: ${getRandomItem(ghzBands)}
+ISP: ${getRandomItem(isps)}
+Latency: ${getRandomItem(latencies)}
+Wavelength: ${getRandomItem(wavelengths)}
+RSSI: ${getRandomItem(rssiValues)}
+Connected IPs: ${getRandomIPv4()}, ${getRandomIPv4()}, ${getRandomIPv4()}
+Creation Date: ${getRandomDate()}
+--------------------------------`;
+    }
+
+    function spamIPs() {
+        document.body.innerText += generateNetworkInfo() + "\n";
+        requestAnimationFrame(spamIPs); // Runs as fast as possible!
+    }
+
+    spamIPs();
+</script>
+
+</body>
+</html>
